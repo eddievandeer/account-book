@@ -1,16 +1,21 @@
 import { Service } from 'egg';
-const fs = require('fs');
+const csv = require('csvtojson')
+const { resolve } = require('path')
 
-const bills = JSON.parse(fs.readFileSync('./app/data/bill.json').toString());
+let bills: IAccountList = []
 
-const mAccount: IAccountList = [...bills]
+csv({ checkType: true })
+    .fromFile(resolve(__dirname, '../data/bill.csv'))
+    .then(json => {
+        bills = json
+    })
 
 export default class Test extends Service {
     /**
      * 查询数据并返回排序后的结果
      */
     public async getAccounts() {
-        return mAccount.sort((a: IAccount, b: IAccount) => {
+        return bills.sort((a: IAccount, b: IAccount) => {
             return b.time - a.time
         })
     }
@@ -20,6 +25,6 @@ export default class Test extends Service {
      * @param newAccount - 要添加的新账单
      */
     public async addNewAccount(newAccount: IAccount) {
-        mAccount.push(newAccount)
+        bills.push(newAccount)
     }
 }

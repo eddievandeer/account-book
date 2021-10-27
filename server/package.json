@@ -22,6 +22,7 @@
     "clean": "ets clean"
   },
   "dependencies": {
+    "csvtojson": "^2.0.10",
     "egg": "^2.6.1",
     "egg-cors": "^2.2.3",
     "egg-scripts": "^2.6.0"

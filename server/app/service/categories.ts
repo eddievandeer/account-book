@@ -1,16 +1,21 @@
 import { Service } from 'egg';
-const fs = require('fs');
+const csv = require('csvtojson')
+const { resolve } = require('path')
 
-const categories = JSON.parse(fs.readFileSync('./app/data/categories.json').toString())
+let categories: ICategoryList = []
 
-const mCategory: ICategoryList = [...categories]
+csv({ checkType: true })
+    .fromFile(resolve(__dirname, '../data/categories.csv'))
+    .then(json => {
+        categories = json
+    })
 
 export default class Test extends Service {
     /**
      * 查询分类数据并返回
      */
     public async getCategories() {
-        return mCategory
+        return categories
     }
 
     /**
@@ -18,6 +23,6 @@ export default class Test extends Service {
      * @param newCategory - 要添加的新分类
      */
     public async addNewCategory(newCategory: ICategory) {
-        mCategory.push(newCategory)
+        categories.push(newCategory)
     }
 }
