@@ -8,7 +8,9 @@
     "build": "react-scripts build",
     "server": "cd ./server && npm run dev",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "installAll": "yarn && npm run installServer",
+    "installServer": "cd ./server && yarn"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
