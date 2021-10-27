@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# 开始
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+本项目使用 `React` + `antd` + `dva` 来构建前端应用，使用 `eggjs` 构建后端服务
 
-## Available Scripts
+为方便调试没有使用数据库，直接将 `.csv` 数据放在 `server/app/data` 目录下，使用 `csvtojson` 库将其解析为数组，并将其保存在内存中，就可以将数据读取并返回至前端，而添加操作也是对内存中的数据进行操作
 
-In the project directory, you can run:
+之后若需要连接数据库，只需要在 `server/app/config` 下进行数据库的配置，并在 service 中编写操作数据库的代码即可实现
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 安装依赖
 
-### `yarn test`
+前后端项目虽然在同一个目录下，但他们有各自的依赖，不共用一个 `package.json` ，因此安装依赖时使用自定义的 npm 安装脚本
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+~~~bash
+npm run installAll
+# OR yarn installAll
+~~~
 
-### `yarn build`
+也可以两边各自去安装依赖
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+~~~bash
+npm install
+# OR yarn
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+cd ./server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm install
+# OR yarn
+~~~
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 启动后端服务
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+~~~bash
+npm run server
+# OR yarn server
+~~~
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 启动前端服务
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+~~~bash
+npm start
+# OR yarn start
+~~~
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## 同时启动前后端
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+使用 `concurrently` 包来同时运行两个服务，但控制台打印信息较原来的会不那么美观，建议开两个控制台，一个运行前端服务一个运行后端服务
 
-### Making a Progressive Web App
+~~~bash
+npm run dev
+# OR yarn dev
+~~~
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
